@@ -1,0 +1,96 @@
+{
+    "info": {
+        "name": "rotate_test",
+        "job": "MD",
+        "job_specific": "ro\tro",
+        "career": "ro"
+    },
+    "score": "Score: 12/15",
+    "data": [
+        "synth_sh/low_synth_4.bmp",
+        "synth_sh/high_synth_6.bmp",
+        "real_sh/mid_real_3.bmp",
+        "synth_sh/mid_synth_2.bmp",
+        "synth_sh/mid_synth_6.bmp",
+        "synth_sh/high_synth_4.bmp",
+        "synth_sh/high_synth_3.bmp",
+        "real_sh/low_real_3.bmp",
+        "real_sh/low_real_4.bmp",
+        "synth_sh/mid_synth_1.bmp",
+        "real_sh/high_real_4.bmp",
+        "synth_sh/low_synth_3.bmp",
+        "synth_sh/low_synth_6.bmp",
+        "real_sh/high_real_1.bmp",
+        "real_sh/high_real_3.bmp"
+    ],
+    "test": [
+        [
+            0,
+            5.479132413864136
+        ],
+        [
+            0,
+            1.6061487197875977
+        ],
+        [
+            1,
+            4.92159104347229
+        ],
+        [
+            0,
+            3.248239517211914
+        ],
+        [
+            1,
+            3.8802990913391113
+        ],
+        [
+            0,
+            3.714845895767212
+        ],
+        [
+            1,
+            4.67774772644043
+        ],
+        [
+            1,
+            2.044924020767212
+        ],
+        [
+            1,
+            1.706453561782837
+        ],
+        [
+            0,
+            2.9583523273468018
+        ],
+        [
+            1,
+            4.639003038406372
+        ],
+        [
+            0,
+            2.5823066234588623
+        ],
+        [
+            1,
+            2.2286088466644287
+        ],
+        [
+            1,
+            2.0126020908355713
+        ],
+        [
+            1,
+            2.175118923187256
+        ]
+    ],
+    "bounding_box": {
+        "0": [],
+        "1": [],
+        "3": [],
+        "5": [],
+        "9": [],
+        "11": []
+    }
+}

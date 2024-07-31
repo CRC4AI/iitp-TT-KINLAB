@@ -1,6 +1,4 @@
-# iitp-TT-KINLAB
- 
-IITP Turingtester
+## IITP Turingtester
 ===
 How to use
 ---

@@ -16,6 +16,8 @@ from src import TesterWidget
 from src import AnswerWidget
 from src import InfoWidget
 
+
+
 form_class = uic.loadUiType("main.ui")[0]
 
 DATA_LENGTH = 15
@@ -62,7 +64,6 @@ class MyAppWindow(QMainWindow, form_class):
         self.tabs = QTabWidget()
         self.tabs.addTab(self.info_tab, 'Info')
         self.tabs.addTab(self.test_tab, 'Test')
-        
         
         
         self.setCentralWidget(self.tabs)

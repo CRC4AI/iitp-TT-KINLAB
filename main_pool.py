@@ -5,12 +5,12 @@ from PyQt5.QtGui import QMouseEvent, QFont, QFontDatabase
 from PyQt5 import uic, QtCore, QtOpenGL
 from PIL import Image
 import json
-import datetime
 
 import moderngl
 import numpy as np
 
 import random
+import time
 
 from src import TesterWidget
 from src import AnswerWidget
@@ -49,7 +49,7 @@ class MyAppWindow(QMainWindow, form_class):
         self.synth_data_list = [synth_dir + f for f in self.synth_data_list]
         
         self.randomize_data()
-        
+        self.save_file_path = None
         self.initUI()
         
         
@@ -58,9 +58,11 @@ class MyAppWindow(QMainWindow, form_class):
         self.test_tab = TesterWidget(self)
         self.answer_tab = AnswerWidget(self)
         
+        
         self.tabs = QTabWidget()
         self.tabs.addTab(self.info_tab, 'Info')
         self.tabs.addTab(self.test_tab, 'Test')
+        
         
         
         self.setCentralWidget(self.tabs)
@@ -70,21 +72,34 @@ class MyAppWindow(QMainWindow, form_class):
         self.tabs.currentChanged.connect(self.tab_changed)
         
     def save_data(self):
+        # 정보 가져오기
         info_data = self.tabs.widget(0).get_data()
-        data = {"info": info_data, "score": self.answer_tab.score_calculate(), "data": self.data_list, "test": self.test_tab.get_data(), "bounding_box": self.answer_tab.get_data()}
+        data = {
+            "info": info_data,
+            "score": self.answer_tab.score_calculate(),
+            "data": self.data_list,
+            "test": self.test_tab.get_data(),
+            "bounding_box": self.answer_tab.get_data()
+        }
         name = info_data["name"]
         
-        # 현재 시간을 가져와서 문자열로 변환
-        # timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-       
-        # 유닉스 타임
-        timestamp = int(datetime.datetime.now().timestamp())
+        # 유닉스 타임 생성 및 파일 경로 설정
+        if self.save_file_path is None:
+            timestamp = int(time.time())
+            self.save_file_path = f"./save/{timestamp}_{name}.json"
+
         
-        # 파일 이름에 타임스탬프를 추가
-        filename = f"./save/{timestamp}_{name}.json"
-        
-        with open(filename, 'w', encoding="UTF-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
+        # 파일이 이미 존재하면 데이터를 추가할 수 있도록 수정
+        if os.path.exists(self.save_file_path):
+            with open(self.save_file_path, 'r+', encoding="UTF-8") as f:
+                existing_data = json.load(f)
+                # 기존 데이터에 새로운 데이터를 병합
+                existing_data.update(data)
+                f.seek(0)
+                json.dump(existing_data, f, ensure_ascii=False, indent=4)
+        else:
+            with open(self.save_file_path, 'w', encoding="UTF-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
                 
     def tab_changed(self, index):
         if index == 1:
@@ -118,3 +133,4 @@ if __name__ == '__main__':
     
     myWindow = MyAppWindow()
     sys.exit(app.exec_())
+    

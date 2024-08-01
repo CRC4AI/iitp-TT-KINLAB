@@ -23,6 +23,7 @@ class InfoWidget(QWidget):
         self.careerLabel.setStyleSheet("QLabel { background-color : #004191; font-size: 20px; font-weight: bold; color: white;}")
         
         self.nameText = QTextEdit(self)
+        self.nameText.setPlaceholderText("성함을 입력하세요")
         
         self.jobDropbox = QComboBox(self)
         self.jobDropbox.addItem('MD')
@@ -30,6 +31,7 @@ class InfoWidget(QWidget):
         self.jobDropbox.addItem('Student')
         self.jobDropbox.addItem('Others')
         self.jobText = QTextEdit(self)
+        self.jobText.setPlaceholderText("세부 직종을 입력하세요")
         
         # self.careerDropbox = QComboBox(self)
         # self.careerDropbox.addItem('1년 미만')
@@ -37,6 +39,7 @@ class InfoWidget(QWidget):
         # self.careerDropbox.addItem('5년 이상')
         # self.careerDropbox.addItem('기타')
         self.careerText = QTextEdit(self)
+        self.careerText.setPlaceholderText("경력(연차)를 입력하세요")
         
         self.nameLabel.setGeometry(280, 275, 180, 50)
         self.nameText.setGeometry(500, 275, 520, 50)

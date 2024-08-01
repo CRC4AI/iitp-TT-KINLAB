@@ -5,6 +5,7 @@ from PyQt5.QtGui import QMouseEvent, QFont, QFontDatabase
 from PyQt5 import uic, QtCore, QtOpenGL
 from PIL import Image
 import json
+import datetime
 
 import moderngl
 import numpy as np
@@ -70,9 +71,19 @@ class MyAppWindow(QMainWindow, form_class):
         
     def save_data(self):
         info_data = self.tabs.widget(0).get_data()
-        data = {"info":info_data, "score":self.answer_tab.score_calculate(), "data":self.data_list, "test":self.test_tab.get_data(), "bounding_box":self.answer_tab.get_data()}
+        data = {"info": info_data, "score": self.answer_tab.score_calculate(), "data": self.data_list, "test": self.test_tab.get_data(), "bounding_box": self.answer_tab.get_data()}
         name = info_data["name"]
-        with open("./save/" + name + ".json", 'w', encoding="UTF-8") as f:
+        
+        # 현재 시간을 가져와서 문자열로 변환
+        # timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+       
+        # 유닉스 타임
+        timestamp = int(datetime.datetime.now().timestamp())
+        
+        # 파일 이름에 타임스탬프를 추가
+        filename = f"./save/{timestamp}_{name}.json"
+        
+        with open(filename, 'w', encoding="UTF-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
                 
     def tab_changed(self, index):
@@ -107,4 +118,3 @@ if __name__ == '__main__':
     
     myWindow = MyAppWindow()
     sys.exit(app.exec_())
-    
